@@ -1,55 +1,91 @@
-import React, {useReducer} from 'react';
-import TodoForm from './components/todoForm';
+import React from 'react';
 import TodoList from './components/todoList';
-import './App.css';
-import "./components/todo.css";
-import {
-  formReducer,
-  initialState,
-  ADD_TASK,
-  TOGGLE_TASK,
-  CLEAR_TASK
-} from './reducer/reducer.js';
+import styles from './components/styles.css';
+import TodoForm from './components/todoForm';
 
+const taskList = [
+  {
+    task: 'Clean the kitchen',
+    id: '1',
+    completed: false
+  },
+  {
+    task: 'Organize comic collection',
+    id: '2',
+    completed: false
+  },
+  {
+    task: 'do laundry',
+    id: '3',
+    completed: false
+  },
+  {
+    task: 'Take out trash',
+    id: '4',
+    completed: false
+  },
+  {
+    task: 'Clean the counter',
+    id: '5',
+    completed: false
+  },
+]
 
-const App = () => {
+class App extends React.Component {
 
-  const [state, dispatch] = useReducer(formReducer, initialState);
-
-    //add task
-    const addTask = (e, data) => {
-      e.preventDefault();
-      dispatch({ type: ADD_TASK, payload: data });
-    };
-
-    //toggletask
-    const toggleTask = taskId => {
-      dispatch({ type: TOGGLE_TASK, payload: taskId });
-    };
-
-    //clear task
-    const clearTask = e => {
-      e.preventDefault();
-      dispatch({ type: CLEAR_TASK });
-    };
-
-  return (
-    <div>
-      <header>
-      <h2>Todo List</h2>
-      </header>
-      <main>
-      <TodoList
-        data = {state.data}
-        toggleTask = {toggleTask}
-        clearTask = {clearTask}
-        />
-      </main>
-      <div>
-      <TodoForm addTask={addTask} />
-      </div>
-    </div>
-  );
+constructor() {
+  super();
+  this.state = {
+    taskList
+  }
 }
 
+toggleTodo = todoId => {
+  this.setState({
+    taskList: this.state.taskList.map(todo => {
+        if (todoId === todo.id) {
+          return {
+            ...todo,
+            completed: !todo.completed
+          };
+        }
+        return todo;
+    })
+  });
+};
+
+addTodo = (todo) => {
+  const newTodo = {
+    task: todo,
+    id: Date.now(),
+    completed: false
+  };
+  this.setState({
+    taskList: [...this.state.taskList, newTodo]
+  })
+};
+
+clearTodo = e => {
+  e.preventDefault();
+  this.setState({
+    taskList: this.state.taskList.filter(todo => !todo.completed)
+  })
+}
+
+render() {
+  return (
+<div className='App'>
+        <div className="header">
+          <h2>My Todo App!</h2>
+          <TodoForm addTodo={this.addTodo}/>
+        </div>
+        <TodoList 
+          taskList={this.state.taskList}
+          toggleTodo={this.toggleTodo}
+          clearTodo={this.clearTodo}
+          />
+      </div>
+    );
+  }
+}
 export default App;

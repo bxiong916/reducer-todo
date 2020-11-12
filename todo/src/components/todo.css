@@ -1,9 +1,0 @@
-.task {
-    width: 45%;
-    margin: 4px 0;
-  }
-
-  .task.completed {
-    text-decoration: line-through;
-    background-color:red;
-  }  
