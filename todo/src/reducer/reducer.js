@@ -5,9 +5,9 @@ export const CLEAR_TASK = 'CLEAR_TASK';
 export const initialState ={
     data: [
     {
-      task: 'Eat More Tacos',
-      id: Date.now(),
-      completed:false
+      task: 'Take out the trash',
+      completed:false,
+      id: Date.now()
     }
   ]
 }

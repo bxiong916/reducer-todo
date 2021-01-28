@@ -6,28 +6,28 @@ import TodoForm from './components/todoForm';
 const taskList = [
   {
     task: 'Clean the kitchen',
-    id: '1',
-    completed: false
+    completed: false,
+    id: '1'
   },
   {
     task: 'Organize comic collection',
-    id: '2',
-    completed: false
+    completed: false,
+    id: '2'
   },
   {
-    task: 'do laundry',
-    id: '3',
-    completed: false
+    task: 'Do laundry',
+    completed: false,
+    id: '3'
   },
   {
     task: 'Take out trash',
-    id: '4',
-    completed: false
+    completed: false,
+    id: '4'
   },
   {
     task: 'Clean the counter',
-    id: '5',
-    completed: false
+    completed: false,
+    id: '5'
   },
 ]
 
